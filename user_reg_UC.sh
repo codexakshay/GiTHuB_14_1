@@ -21,7 +21,7 @@ mn_val="^[0-9]{10}$"
 
 echo -e "ENTER PASSWORD : \c"
 read pwd
-pwd_val="^(?=.*?[A-Z])([a-z]).{7,}$"
+pwd_val="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{7,}$"
 
 
 #FIRST NAME
