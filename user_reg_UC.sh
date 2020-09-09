@@ -21,7 +21,6 @@ mn_val="^[0-9]{10}$"
 
 echo -e "ENTER PASSWORD : \c"
 read pwd
-pwd_val="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$"
 
 
 #FIRST NAME
@@ -65,7 +64,9 @@ pwd_val="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$"
 
 #PASSWORD
 
-        if ! [[ $pwd =~ $pwd_val ]]
+        pwd_val=$(($(tr -d '[[:alnum:]]' <<< $pwd | wc -m)-1))
+
+        if ! [[ ${#pwd} -ge 8 && $pwd =~ [[:upper:]] && $pwd =~ [[:lower:]] && $pwd =~ [[:digit:]]  &&  $pwd_val =~ 1  ]]
         then
                 echo "INVALID PASSWORD"
         else
