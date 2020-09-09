@@ -4,11 +4,9 @@ f_n_val="^[Cap]+[a-z]*$"
 
 l_n_val="^[Cap]+[a-z]*$"
 
-e_val="^[abc]+[0-9]*([-_+.][0-9a-z]+)*@[0-9a-z]+[.][a-z]{2,4}([,]{1})*([.][a-z]{2})*$"
+e_val="^[a-z]+[0-9]*([-_+.][0-9a-z]+)*@[0-9a-z]+[.][a-z]{2,4}([,]{1})*([.][a-z]{2})*$"
 
 mn_val="^[0-9]{10}$"
-
-pwd_val="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$"
 
 echo -e "\n    --REGEX & VALIDATION--\n"
 echo -e "\n1. USER PROFILE REGISTRATION"
@@ -87,8 +85,9 @@ then
 
 #PASSWORD
 
+	pwd_val=$(($(tr -d '[[:alnum:]]' <<< $pwd | wc -m)-1))
 
-        if ! [[ $pwd =~ $pwd_val ]]
+        if ! [[ ${#pwd} -ge 8 && $pwd =~ [[:upper:]] && $pwd =~ [[:lower:]] && $pwd =~ [[:digit:]]  &&  $pwd_val =~ 1  ]]
         then
                 echo -e "\nINVALID PASSWORD"
         else
